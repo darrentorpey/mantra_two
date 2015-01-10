@@ -1,0 +1,10 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "export": true,
+        "var2": false
+    }
+}
