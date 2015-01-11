@@ -1,5 +1,6 @@
 import Canvas from 'display/canvasDrawing';
-import { Grid } from 'mapping/grid';
+import { Grid, TileGrid } from 'mapping/grid';
+import debug from 'helpers/debugHelpers';
 
 var canvas = Canvas.create();
 
@@ -26,25 +27,25 @@ var colorMap = {
 };
 
 var asciiMap = `
-WWWWWWWWWWWWWWWWWWWWWWW
-W                     W
-W  5 3 4 5  6        1W
-W 2              35  1W
-W  5     4 6          W
-W    4  4 2   7       W
-W  2     32           W
-W     6  1   43 1     W
-W              5      W
-W      1  5           W
-W             4       W
-W   1           3     W
-W   4          3  24  W
-W          15    14   W
-W  5            2 3   W
-W    2    3           W
-W                  5  W
-W      11             W
-WWWWWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWW
+W                       W
+W  5 3 4 5  6        12 W
+W 2              35  11 W
+W  5     4 6            W
+W    4  4 2   7         W
+W  2     32             W
+W     6  1   43 1       W
+W              5        W
+W      1  5             W
+W             4         W
+W   1           3       W
+W   4          3  24    W
+W          15    14     W
+W  5            2 3     W
+W    2    3             W
+W                  5    W
+W      11               W
+WWWWWWWWWWWWWWWWWWWWWWWWW
 `;
 
 var addBox = function( { x, y, color } ) {
@@ -62,16 +63,19 @@ var renderMap = function( start, asciiMap ) {
   });
 };
 
-renderMap( { x: 9, y: 5 }, asciiMap )
+renderMap( { x: 10, y: 5 }, asciiMap );
 
-var logGrid = function() {
-  for ( let tile of grid.getTiles() ) {
-    console.log( tile.toString() );
-  }
-};
+var map = TileMap.create({
+  offset: { x: 10, y: 5 },
+  data: asciiMap
+});
+
+map.render( canvas );
+
 
 Object.assign( window, {
+  debug,
+  map,
   canvas,
-  grid,
-  logGrid
+  grid
 });
