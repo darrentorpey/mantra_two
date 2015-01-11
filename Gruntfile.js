@@ -24,6 +24,9 @@ module.exports = function( grunt ) {
                 'files': [{
                     src: 'lib/**',
                     dest: 'dist/'
+                }, {
+                    src: 'node_modules/grunt-6to5/node_modules/6to5/browser-polyfill.js',
+                    dest: 'dist/lib/polyfill.js'
                 }]
             }
         },
