@@ -1,30 +1,9 @@
-import Canvas from 'display/canvasDrawing';
+import Canvas from 'display/canvas/canvasDrawing';
 import { Grid, TileGrid } from 'mapping/grid';
 import debug from 'helpers/debugHelpers';
+import Mouse from 'controls/mouse';
 
-var canvas = Canvas.create();
-
-document.body.appendChild( canvas.dom );
-
-var grid = Grid.create({
-  width: 8,
-  height: 5,
-  tileWidth: 64,
-  tileHeight: 64
-});
-
-var colorMap = {
-  '_': null,
-	' ': null,
-  'W': '#DDDDDD',
-  '1': '#F92672',
-  '2': '#66D9EF',
-  '3': '#A6E22E',
-  '4': '#FD971F',
-  '5': '#E6DB74',
-  '6': '#AE81FF',
-  '7': '#DDDDDD'
-};
+var canvas = Canvas.makeSimple();
 
 var asciiMap = `
 WWWWWWWWWWWWWWWWWWWWWWWWW
@@ -36,7 +15,7 @@ W    4  4 2   7         W
 W  2     32             W
 W     6  1   43 1       W
 W              5        W
-W      1  5             W
+W      1  5         5   W
 W             4         W
 W   1           3       W
 W   4          3  24    W
@@ -48,34 +27,29 @@ W      11               W
 WWWWWWWWWWWWWWWWWWWWWWWWW
 `;
 
-var addBox = function( { x, y, color } ) {
-  canvas.drawSquare( { x, y, w: 20, h: 20, style: colorMap[ color ] || color } );
-};
-
-var renderMap = function( start, asciiMap ) {
-  _.each( asciiMap.split( '\n' ), function( row, rowIndex ) {
-    _.each( Array.from( row ), function( cell, colIndex ) {
-      var color = colorMap[ cell ];
-      if ( color ) {
-        addBox( { x: start.x + ( colIndex * 25 ), y: start.y + ( ( rowIndex - 1 ) * 25 ), color: color } );
-      }
-    });
-  });
-};
-
-renderMap( { x: 10, y: 5 }, asciiMap );
-
-var map = TileMap.create({
+var tileGrid = TileGrid.render( {
+  canvas: canvas,
+  data: asciiMap,
   offset: { x: 10, y: 5 },
-  data: asciiMap
+  tileWidth: 24,
+  tileHeight: 24,
+  gridOffset: { x: 10, y: 5 }
 });
 
-map.render( canvas );
+var mouse = new Mouse( canvas );
 
+/**
+mouse.listenToClicks( canvas, function( click ) {
+  console.log( 'click', click );
+});
+*/
+
+mouse.watchTileClicks( canvas, tileGrid, function( click ) {
+  console.log( 'click tile', click );
+});
 
 Object.assign( window, {
   debug,
-  map,
-  canvas,
-  grid
+  tileGrid,
+  canvas
 });
