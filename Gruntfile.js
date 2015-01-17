@@ -9,7 +9,8 @@ module.exports = function( grunt ) {
     '6to5': {
       options: {
         sourceMap: true,
-        modules: 'amd'
+        modules: 'amd',
+        experimental: true
       },
       build: {
         files: [{
