@@ -9,25 +9,36 @@ var mouse = new Mouse( canvas );
 mouse.logClicks( canvas );
 
 var asciiMap = `
-WWWWWWWWWWWWWWWWWWWWWWWWW
-W1                      W
-W 2  3 4 5  6        12 W
-W  3             35  11 W
-W   4    4 6            W
-W    5  4 2   7         W
-W  2  6  32             W
-W        1   43 1       W
-W              5        W
-W      1  5         5   W
-W             4         W
-W   1           3       W
-W   4          3  24    W
-W          15    14     W
-W  5            2 3     W
-W    2    3             W
-W                  5    W
-W      11               W
-WWWWWWWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+W1                                     W
+W 2  3 4 5  6          1             2 W
+W  3             35  1       3       1 W
+W   4    4 6                           W
+W    5  4 2   7                        W
+W  2  6  32               6         5  W
+W        1   43 1              7       W
+W              5                       W
+W      1  5             5         5    W
+W             4                        W
+W   1           3       222222         W
+W   4          3  24                   W
+W          15    14         2          W
+W  5            2 3          3         W
+W    2    3              45            W
+W                  5              1    W
+W      11                              W
+W      11                              W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+W                                      W
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 `;
 
 var tileGrid = TileGrid.create( {
